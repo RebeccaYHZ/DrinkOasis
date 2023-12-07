@@ -8,6 +8,7 @@ const Home = () => {
   const goToReviews = () => {
     navigate('/Reviews');
   };
+  // Home Page has a very good hierarchy of html elements
   return (
     <div className="home-container">
       <div className="home-content">
