@@ -63,7 +63,7 @@ useEffect(() => {
   const handleDelete = (diaryId) => {
     
     const apiUrl = `/userApi/deleteDiary/${diaryId}?id=${userId}`;
-  
+  // One recommendation I would like to give is to use "async await" instead of then. That would make the code a lot easier to read.
     fetch(apiUrl, {
       method: 'DELETE',
       headers: {
@@ -126,7 +126,7 @@ useEffect(() => {
     }
     return null;
   };
-  
+  // I like how u r checking the userID and otherID to make sure the user is authenticated. That would make the website safer.
   return (
     <div className='diary-area'>
       <section className="title">
@@ -134,7 +134,7 @@ useEffect(() => {
           <h1>📖 Diaries</h1>
         </div>
       </section>
-  
+      
       {userId && (!otherId || userId === otherId) && (
         <div className="centered-button">
           <div className='post-btn'>
