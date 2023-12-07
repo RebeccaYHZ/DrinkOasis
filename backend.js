@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const frontendPath = path.join(__dirname, "vite-project", "dist");
-
+// I really like the way u did configuration for managing user sessions in an Express.js application. 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
   resave: false,
