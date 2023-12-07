@@ -1,3 +1,5 @@
+// The methods for get, post etc are written propertly to handle all cases such as success, fail, or error
+
 import express from "express";
 import { reviewDB } from "../modules/reviewDB.js";
 
