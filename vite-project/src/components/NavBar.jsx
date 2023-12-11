@@ -28,13 +28,14 @@ function Navbar() {
   const isAuthenticated = sessionStorage.getItem("user") !== null;
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary" 
+    role="navigation" aria-label="Main navigation">
       <div className="container-fluid">
         <div className="brand-top">
-          <a className='top-brand' href="/">
-            <img className="logo" src={logoImage} alt="Logo" />
-            <a className="navbar-brand" href="/">DrinkOasis</a>
-          </a>
+          <Link to="/" className='top-brand'>
+            <img className="logo" src={logoImage} alt="DrinkOasis Logo" />
+            <span className="navbar-brand">DrinkOasis</span>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"

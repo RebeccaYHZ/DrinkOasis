@@ -9,8 +9,8 @@ const Home = () => {
     navigate('/Reviews');
   };
   return (
-    <div className="home-container">
-      <div className="home-content">
+    <main className="home-container" role="main">
+      <section className="home-content">
         <div className="home-text">
           <h1>Explore DrinkOasis</h1>
           <p className="description">
@@ -27,10 +27,10 @@ const Home = () => {
           </div>
         </div>
         <div className="home-image">
-          <img src={cocktailImage} alt="Cocktail" />
+          <img src={cocktailImage} alt="A photo of a cocktail bar" />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

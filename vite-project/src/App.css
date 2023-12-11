@@ -73,3 +73,8 @@
 .nav-item {
   margin-left: 50px;
 }
+
+.navbar a:focus, .navbar button:focus {
+  outline: 2px solid blue;
+  outline-offset: 2px;
+}
