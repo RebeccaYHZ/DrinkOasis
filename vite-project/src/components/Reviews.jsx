@@ -42,17 +42,6 @@ function Reviews() {
         };
         
         fetchSession();
-        
-        // fetch('/api/reviews')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //       if (Array.isArray(data)) {
-        //         setReviews(data);
-        //       } else {
-        //           console.error("Unexpected data format:", data);
-        //       }
-        //   })
-        //     .catch(error => console.error("Error fetching reviews:", error));
 
         const fetchReviews = async () => {
           try {
@@ -166,75 +155,85 @@ function Reviews() {
     };    
 
     return (
-        <div className="main">
-            <div className="title">
+        <main className="main" aria-label="Reviews section">
+            <header className="title">
                 <h1>Bar Reviews</h1>
                 <div className="post-btn">
                     <button className="add-review-btn" onClick={() => navigate("/PostReview")}>Add a Review</button>
                 </div>
-            </div>
-            {reviews.map((review) => (
-                <div key={review._id} className="review">
-                    {editReviewId === review._id ? (
-                    <div>
-                        {/* The inline edit form */}
-                        <label htmlFor="barName">Bar Name: </label>
-                        <input
-                            type="text"
-                            id="barName"
-                            name="barName"
-                            value={editFormData.barName}
-                            onChange={handleEditFormChange}
-                        />
-                        <label htmlFor="location">Location: </label>
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            value={editFormData.location}
-                            onChange={handleEditFormChange}
-                        />
-                        <label htmlFor="address">Address: </label>
-                        <input
-                            type="text"
-                            id="address"
-                            name="address"
-                            value={editFormData.address}
-                            onChange={handleEditFormChange}
-                        />
-                        <label htmlFor="review">Review: </label>
-                        <input
-                            type="text"
-                            id="review"
-                            name="review"
-                            value={editFormData.review}
-                            onChange={handleEditFormChange}
-                        />
-                        <button type="button" onClick={handleSaveClick}>Save</button>
-                        <button type="button" onClick={handleCancelClick}>Cancel</button>
-                    </div>
-                    ) : (
-                    <div>
-                        {/* The display mode */}
-                        <h2>{review.barName}</h2>
-                        <p>Location: {review.location}</p>
-                        <p>Street Address: {review.address}</p>
-                        <p>Review: {review.review}</p>
-                        <p>Author: <span className="clickable-author" onClick={() => navigateToUserDiary(review.id)}>{review.authorName}</span></p>
-                        {renderEditDeleteButtons(review)}
-                    </div>
-                    )}
-                </div>
-            ))}
-            <div className="pagination">
+            </header>
+            <section aria-live="polite">
+              {reviews.map((review) => (
+                  <article key={review._id} className="review">
+                      {editReviewId === review._id ? (
+                      <div>
+                          {/* The inline edit form */}
+                          <label htmlFor="barName">Bar Name: </label>
+                          <input
+                              type="text"
+                              id="barName"
+                              name="barName"
+                              value={editFormData.barName}
+                              onChange={handleEditFormChange}
+                          />
+                          <label htmlFor="location">Location: </label>
+                          <input
+                              type="text"
+                              id="location"
+                              name="location"
+                              value={editFormData.location}
+                              onChange={handleEditFormChange}
+                          />
+                          <label htmlFor="address">Address: </label>
+                          <input
+                              type="text"
+                              id="address"
+                              name="address"
+                              value={editFormData.address}
+                              onChange={handleEditFormChange}
+                          />
+                          <label htmlFor="review">Review: </label>
+                          <input
+                              type="text"
+                              id="review"
+                              name="review"
+                              value={editFormData.review}
+                              onChange={handleEditFormChange}
+                          />
+                          <button type="button" onClick={handleSaveClick}>Save</button>
+                          <button type="button" onClick={handleCancelClick}>Cancel</button>
+                      </div>
+                      ) : (
+                      <div>
+                          {/* The display mode */}
+                          <h2>{review.barName}</h2>
+                          <p>Location: {review.location}</p>
+                          <p>Street Address: {review.address}</p>
+                          <p>Review: {review.review}</p>
+                          <p>Author: 
+                            <button 
+                              className="clickable-author" 
+                              onClick={() => navigateToUserDiary(review.id)}
+                              tabIndex={0}
+                              aria-label={`Navigate to diary of author ${review.authorName}`}
+                            >
+                              {review.authorName}
+                            </button>
+                          </p>
+                          {renderEditDeleteButtons(review)}
+                      </div>
+                      )}
+                  </article>
+              ))}
+            </section>
+            <nav className="pagination" aria-label="Pagination">
               <button onClick={goToFirstPage} disabled={currentPage === 1}>First</button>
               <button onClick={goToPreviousPage} disabled={currentPage === 1}>Previous</button>
               <span>Page {currentPage} of {totalPages}</span>
               <button onClick={goToNextPage} disabled={currentPage === totalPages}>Next</button>
               <button onClick={goToLastPage} disabled={currentPage === totalPages}>Last</button>
-            </div>
-
-        </div>
+            </nav>
+        </main>
     );
 }
 

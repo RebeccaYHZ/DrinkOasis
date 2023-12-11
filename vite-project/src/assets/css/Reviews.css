@@ -103,6 +103,7 @@ h1 {
     cursor: pointer;
     color: #0645AD;
     text-decoration: underline;
+    border: none;
   }
   
   .clickable-author:hover {
