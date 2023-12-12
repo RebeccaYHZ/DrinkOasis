@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../assets/css/PostReview.css';
 
 function PostReview() {
@@ -67,6 +68,7 @@ function PostReview() {
         <textarea id="review" placeholder="Review" value={review} onChange={e => setReview(e.target.value)} />
 
         <button type="submit">Submit</button>
+        <Link to="/Reviews" className='back-link'>Back to Reviews</Link>
       </form>
     </div>
   );
