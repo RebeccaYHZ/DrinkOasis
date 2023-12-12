@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../app.css';
@@ -6,6 +7,26 @@ import logoImage from '../assets/img/logoImage.png';
 
 function Navbar() {
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/userApi/checkAuth");
+  
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Error checking authentication status:", error);
+        setIsAuthenticated(false);
+      }
+    };
+  
+    checkAuth();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -25,7 +46,7 @@ function Navbar() {
     navigate('/Login');
   };
 
-  const isAuthenticated = sessionStorage.getItem("user") !== null;
+  // const isAuthenticated = sessionStorage.getItem("user") !== null;
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary" 

@@ -102,7 +102,7 @@ function UserDB() {
     const usersCollection = db.collection("User");
 
     try {
-      const user = await usersCollection.findById(id);
+      const user = await usersCollection.findOne({ _id: new ObjectId(id) });
       console.log("User found:", user);
       return user;
     } catch (error) {
