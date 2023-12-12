@@ -1,3 +1,15 @@
+ @import url('https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Vollkorn', serif;
+}
+
+body h1 {
+  font-family: 'Afacad';
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
 .main {
     display: flex;
     flex-direction: column;
