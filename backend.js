@@ -11,51 +11,70 @@ import LocalStrategy from "passport-local";
 import crypto from "crypto";
 import { userDB } from "./modules/userDB.js";
 
-userDB.getUser = () => {
-  return {
-    username: "test",
-    salt: Buffer.from("test"),
-    hashed_password: Buffer.from("test"),
-  };
-};
+// userDB.getUser = () => {
+//   return {
+//     username: "test",
+//     salt: Buffer.from("test"),
+//     hashed_password: Buffer.from("test"),
+//   };
+// };
 
-const strategy = new LocalStrategy(function verify(username, password, cb) {
+const strategy = new LocalStrategy(async function verify(
+  username,
+  password,
+  cb
+) {
   try {
     console.log("verify", username, password);
 
-    const user = userDB.getUser(username);
+    const user = await userDB.getUser(username);
 
     if (!user) {
-      cb(null, false, { message: "Incorrect username or password." });
-      return false;
+      return cb(null, false, { message: "Incorrect username or password." });
     }
 
     crypto.pbkdf2(
       password,
       user.salt,
-      310000,
-      32,
-      "sha256",
+      1000,
+      64,
+      "sha512",
       function (err, hashedPassword) {
         if (err) {
           return cb(err);
         }
-        // if (!crypto.timingSafeEqual(user.hashed_password, hashedPassword)) {
-        //   return cb(null, false, {
-        //     message: "Incorrect username or password.",
-        //   });
-        // }
+        if (hashedPassword.toString("hex") !== user.hashed_password) {
+          return cb(null, false, {
+            message: "Incorrect username or password.",
+          });
+        }
         return cb(null, user);
       }
     );
-
-    cb(null, user);
   } catch (err) {
     console.log("error in verify", err);
-    cb(err);
+    return cb(err);
   }
 });
 passport.use(strategy);
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await userDB.getUserById(id);
+
+    if (!user) {
+      return done(new Error("User not found"));
+    }
+
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
+});
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -78,6 +97,9 @@ const sessionConfig = {
 app.use(express.static(frontendPath));
 app.use(express.json());
 app.use(session(sessionConfig));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api", api);
 app.use("/userApi", userApi);

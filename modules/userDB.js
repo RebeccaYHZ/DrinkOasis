@@ -73,28 +73,41 @@ function UserDB() {
     }
   };
 
-  userDB.verifyUser = async (userName, userPsw) => {
+  userDB.getUser = async (userName) => {
     const { client, db } = await connectToMongoDB();
     const usersCollection = db.collection("User");
 
-    const user = await usersCollection.findOne({ username: userName });
-
     try {
+      const user = await usersCollection.findOne(
+        { username: userName },
+        { projection: { salt: 1, hashed_password: 1 } }
+      );
+      console.log(user);
+
       if (!user) {
         console.log("User not found");
-        return { success: false, message: "User not found" };
+        return null;
       }
+      const salt = Buffer.from(user.salt, "hex");
 
-      if (user.password !== userPsw) {
-        console.log("Password incorrect");
-        return { success: false, message: "Incorrect password" };
-      }
-      console.log("Password correct");
-
-      return { success: true, user };
+      return user;
     } finally {
       console.log("DB closing connection");
       await client.close();
+    }
+  };
+
+  userDB.getUserById = async (id) => {
+    const { client, db } = await connectToMongoDB();
+    const usersCollection = db.collection("User");
+
+    try {
+      const user = await usersCollection.findById(id);
+      console.log("User found:", user);
+      return user;
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      throw error;
     }
   };
 

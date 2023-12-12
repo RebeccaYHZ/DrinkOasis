@@ -2,14 +2,32 @@ import express from "express";
 const router = express.Router();
 import { userDB } from "../modules/userDB.js";
 import passport from "passport";
+import crypto from "crypto";
 
-router.post(
-  "/login/password",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/Login",
-  })
-);
+// router.post(
+//   "/login/password",
+//   passport.authenticate("local", {
+//     successRedirect: "/",
+//     failureRedirect: "/Login",
+//   })
+// );
+router.post("/login/password", function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return res.status(500).json({ message: "An error occurred" });
+    }
+    if (!user) {
+      return res.status(401).json({ message: "Authentication failed" });
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        console.error("Error during login:", err);
+        return res.status(500).json({ message: "An error occurred" });
+      }
+      return res.status(200).json({ message: "Login successful", user });
+    });
+  })(req, res, next);
+});
 
 router.post("/register", async (req, res) => {
   try {
@@ -17,17 +35,31 @@ router.post("/register", async (req, res) => {
     const diaryCollection = [];
     const maxId = await userDB.getMax();
 
-    const userToInsert = {
-      id: maxId + 1,
-      username: username,
-      email: email,
-      password: password,
-      diaries: diaryCollection,
-    };
+    const salt = crypto.randomBytes(16).toString("hex");
 
-    const result = await userDB.insertUser(userToInsert);
+    crypto.pbkdf2(
+      password,
+      salt,
+      1000,
+      64,
+      "sha512",
+      async (err, hashedPassword) => {
+        if (err) throw err;
 
-    res.json({ message: "User inserted successfully", result });
+        const userToInsert = {
+          id: maxId + 1,
+          username: username,
+          email: email,
+          salt: salt,
+          hashed_password: hashedPassword.toString("hex"),
+          diaries: diaryCollection,
+        };
+
+        const result = await userDB.insertUser(userToInsert);
+
+        res.json({ message: "User inserted successfully", result });
+      }
+    );
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
