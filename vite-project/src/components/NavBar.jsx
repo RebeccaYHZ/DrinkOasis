@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,6 +8,7 @@ import logoImage from '../assets/img/logoImage.png';
 function Navbar() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -26,7 +27,7 @@ function Navbar() {
     };
   
     checkAuth();
-  }, []);
+  }, [location]);
 
   const handleLogout = async () => {
     try {
@@ -82,26 +83,27 @@ function Navbar() {
                 My Diaries
               </Link>
             </li>
-            {!isAuthenticated && (
+            {!isAuthenticated ? (
+          <>
             <li className="nav-item">
               <Link to="/Register" className="nav-link">
                 Sign Up
               </Link>
             </li>
-            )}
-            {!isAuthenticated && (
               <li className="nav-item">
                 <Link to="/Login" className="nav-link">
                   Login
                 </Link>
               </li>
-            )}
-            {isAuthenticated && (
+            </>
+            ) : (
+              <>
               <li className="nav-item">
                 <Link to="/Login" className="nav-link" onClick={handleLogout}>
                   Logout
                 </Link>
               </li>
+              </>
             )}
           </ul>
         </div>
