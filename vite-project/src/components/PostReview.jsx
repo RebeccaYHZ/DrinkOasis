@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/PostReview.css';
 
@@ -7,8 +7,16 @@ function PostReview() {
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
   const [review, setReview] = useState("");
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem("user") !== null;
+    if (!isAuthenticated) {
+      navigate('/Login');
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,24 +36,36 @@ function PostReview() {
         const result = await response.json();
         console.log('Review submitted:', result);
         alert("Review added successfully!");
+        setSubmitStatus("Review added successfully!");
         navigate('/Reviews');
       } else {
         const error = await response.json();
         console.error('Failed to submit review:', error.message);
+        setSubmitStatus(`Failed to submit review: ${error.message}`);
       }
     } catch (error) {
       console.error('Error submitting review:', error);
+      setSubmitStatus(`Error submitting review: ${error.message}`); 
     }
   };
 
   return (
     <div className="post-container">
       <h1>Post a Review</h1>
+      {submitStatus && <div aria-live="assertive">{submitStatus}</div>}
       <form className="post-form" onSubmit={handleSubmit}>
-        <input placeholder="Bar Name" value={barName} onChange={e => setBarName(e.target.value)} />
-        <input placeholder="Location" value={location} onChange={e => setLocation(e.target.value)} />
-        <input placeholder="Address" value={address} onChange={e => setAddress(e.target.value)} />
-        <textarea placeholder="Review" value={review} onChange={e => setReview(e.target.value)} />
+        <label htmlFor="barName">Bar Name</label>
+        <input id="barName" placeholder="Bar Name" value={barName} onChange={e => setBarName(e.target.value)} />
+
+        <label htmlFor="location">Location</label>
+        <input id="location" placeholder="Location" value={location} onChange={e => setLocation(e.target.value)} />
+
+        <label htmlFor="address">Address</label>
+        <input id="address" placeholder="Address" value={address} onChange={e => setAddress(e.target.value)} />
+
+        <label htmlFor="review">Review</label>
+        <textarea id="review" placeholder="Review" value={review} onChange={e => setReview(e.target.value)} />
+
         <button type="submit">Submit</button>
       </form>
     </div>
