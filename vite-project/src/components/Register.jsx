@@ -47,7 +47,7 @@ function Register() {
 
   return (
     <div className="wrapper">
-      <h2 className="form-register-heading">Registration</h2>
+      <h1 className="form-register-heading">Registration</h1>
       <form className="form-register" onSubmit={handleRegister}>
         <div>
           <div className="label-container">

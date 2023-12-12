@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../assets/css/Register.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -37,14 +38,17 @@ function Login() {
 
   return (
     <div className='wrapper'>
-      <h1>Sign in</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="form-register-heading">Login</h1>
+      <form className="form-register" onSubmit={handleSubmit}>
         <section>
+        <div className="label-container">
           <label htmlFor="username">Username</label>
+          </div>
           <input 
             id="username" 
             name="username" 
-            type="text" 
+            type="text"
+            className="form-control" 
             autoComplete="username" 
             required 
             autoFocus
@@ -53,18 +57,21 @@ function Login() {
           />
         </section>
         <section>
+        <div className="label-container">
           <label htmlFor="current-password">Password</label>
+          </div>
           <input 
             id="current-password" 
             name="password" 
-            type="password" 
+            type="password"
+            className="form-control" 
             autoComplete="current-password" 
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </section>
-        <button type="submit">Sign in</button>
+        <button className="btn btn-lg btn-block btn-submit" type="submit">Sign in</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
     </div>
