@@ -2,6 +2,12 @@ body {
   font-family: 'Vollkorn', serif;
 }
 
+body h1 {
+  font-family: 'Afacad';
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
 .home-container {
     display: flex;
     align-items: center;

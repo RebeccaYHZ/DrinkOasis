@@ -2,6 +2,12 @@ body {
     font-family: 'Vollkorn', serif;
 }
 
+body h1 {
+    font-family: 'Afacad';
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+
 .post-area {
     display: grid;
     grid-template-columns: 1fr;
