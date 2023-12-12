@@ -1,7 +1,15 @@
 import express from "express";
-import session from "express-session";
 const router = express.Router();
 import { userDB } from "../modules/userDB.js";
+import passport from "passport";
+
+router.post(
+  "/login/password",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/Login",
+  })
+);
 
 router.post("/register", async (req, res) => {
   try {
@@ -26,30 +34,30 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { username, password } = req.body;
 
-    const result = await userDB.verifyUser(username, password);
+//     const result = await userDB.verifyUser(username, password);
 
-    if (result.success) {
-      req.session.user = { id: result.user.id, username: username };
-      res.status(200).json({
-        success: true,
-        message: "Login successful",
-        userId: result.user.id,
-      });
-    } else {
-      console.log("Authentication failed:", result.message);
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-  } catch (error) {
-    console.log("An error occurred during user verification:", error);
+//     if (result.success) {
+//       req.session.user = { id: result.user.id, username: username };
+//       res.status(200).json({
+//         success: true,
+//         message: "Login successful",
+//         userId: result.user.id,
+//       });
+//     } else {
+//       console.log("Authentication failed:", result.message);
+//       return res.status(401).json({ message: "Invalid credentials" });
+//     }
+//   } catch (error) {
+//     console.log("An error occurred during user verification:", error);
 
-    console.error("Error during verification:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
+//     console.error("Error during verification:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
 
 router.get("/logout", async (req, res) => {
   req.session.destroy((err) => {

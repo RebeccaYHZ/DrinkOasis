@@ -14,6 +14,7 @@ import './app.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
+
 function App() {
 
   const [reviews, setReviews] = useState([]);
@@ -27,7 +28,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Register" element={<Register />} />
-      <Route path="/Login" element={<Login />} render={(props) => <Login {...props} />} />
+      <Route path="/Login" element={<Login />}/>
       <Route path="/Reviews" element={<Reviews reviews={reviews} />} />
       <Route path="/PostReview" element={<PostReview addReview={(review) => setReviews([...reviews, review])} />} />
       <Route path="/Diary" element={<Diary diaries={diaries}/>} />

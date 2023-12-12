@@ -22,7 +22,7 @@ function Navbar() {
     } catch (error) {
       console.error("Error during logout:", error);
     }
-    navigate('/login');
+    navigate('/Login');
   };
 
   const isAuthenticated = sessionStorage.getItem("user") !== null;
