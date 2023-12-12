@@ -128,7 +128,7 @@ useEffect(() => {
   };
   
   return (
-    <div className='diary-area'>
+    <div className='diary-area' aria-live="polite">
       <section className="title">
         <div className="diary-title">
           <h1>📖 Diaries</h1>
