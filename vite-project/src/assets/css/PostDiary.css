@@ -1,3 +1,7 @@
+body {
+    font-family: 'Vollkorn', serif;
+}
+
 .post-area {
     display: grid;
     grid-template-columns: 1fr;

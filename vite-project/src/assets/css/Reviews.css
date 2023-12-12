@@ -1,3 +1,7 @@
+body {
+  font-family: 'Vollkorn', serif;
+}
+
 .main {
     display: flex;
     flex-direction: column;

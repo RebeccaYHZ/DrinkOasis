@@ -1,3 +1,7 @@
+body {
+    font-family: 'Vollkorn', serif;
+}
+
 .diary-area {
     display: grid;
     grid-template-columns: 1fr;
