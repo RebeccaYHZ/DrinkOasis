@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../assets/css/PostReview.css';
@@ -11,8 +11,10 @@ function PostReview() {
   const [submitStatus, setSubmitStatus] = useState("");
 
   const navigate = useNavigate();
+  const mainContentRef = useRef(null);
 
   useEffect(() => {
+    mainContentRef.current.focus();
     const isAuthenticated = sessionStorage.getItem("user") !== null;
     if (!isAuthenticated) {
       navigate('/Login');
@@ -51,7 +53,7 @@ function PostReview() {
   };
 
   return (
-    <div className="post-container">
+    <div className="post-container" ref={mainContentRef} tabIndex="-1">
       <h1>Post a Review</h1>
       {submitStatus && <div aria-live="assertive">{submitStatus}</div>}
       <form className="post-form" onSubmit={handleSubmit}>

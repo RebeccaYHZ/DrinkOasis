@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -11,6 +11,11 @@ function PostDiary() {
   const [statusMessage, setStatusMessage] = useState('');
   const userId = checkUserLoginStatus();
   const navigate = useNavigate();
+  const mainContentRef = useRef(null);
+
+  useEffect(() => {
+    mainContentRef.current.focus();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +64,7 @@ function PostDiary() {
   }
 
   return (
-      <div className='post-area'>
+      <div className='post-area' ref={mainContentRef} tabIndex="-1">
         <section className="title">
         <div className="post-title">
           <h1>📖 Post Your Diary!</h1>
