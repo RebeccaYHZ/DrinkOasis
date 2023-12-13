@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
