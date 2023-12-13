@@ -34,3 +34,11 @@
 .navbar-brand:hover {
     color: #fafaf9;
 }
+
+.logo {
+    width: 7em;
+    height: 7em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter .3s;
+}

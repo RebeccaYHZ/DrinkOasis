@@ -40,8 +40,8 @@ body h1 {
 }
 
 .home-image img {
-  width: 100%;
-  height: auto;
+  width: 600px;
+  height: 843px;
   /* Maintain aspect ratio */
   display: block;
   /* Remove extra space below image */
