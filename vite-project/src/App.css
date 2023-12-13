@@ -7,7 +7,9 @@
 
 .logo {
   width: auto;
-  height: 7em;
+  height: auto;
+  max-width: 15%;
+  max-height: 15%;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
