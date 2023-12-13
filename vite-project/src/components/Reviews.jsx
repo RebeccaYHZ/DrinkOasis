@@ -238,11 +238,11 @@ function Reviews() {
               ))}
             </section>
             <nav className="pagination" aria-label="Pagination">
-              <button onClick={goToFirstPage} disabled={currentPage === 1}>First</button>
-              <button onClick={goToPreviousPage} disabled={currentPage === 1}>Previous</button>
+              <button className="pageBtn" onClick={goToFirstPage} disabled={currentPage === 1}>First</button>
+              <button className="pageBtn" onClick={goToPreviousPage} disabled={currentPage === 1}>Previous</button>
               <span>Page {currentPage} of {totalPages}</span>
-              <button onClick={goToNextPage} disabled={currentPage === totalPages}>Next</button>
-              <button onClick={goToLastPage} disabled={currentPage === totalPages}>Last</button>
+              <button className="pageBtn" onClick={goToNextPage} disabled={currentPage === totalPages}>Next</button>
+              <button className="pageBtn" onClick={goToLastPage} disabled={currentPage === totalPages}>Last</button>
             </nav>
         </main>
     );

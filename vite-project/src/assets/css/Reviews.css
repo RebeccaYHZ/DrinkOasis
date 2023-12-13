@@ -124,3 +124,21 @@
    text-decoration: none;
    cursor: pointer;
  }
+
+ .pageBtn {
+   margin-top: 30px;
+   color: #F8F9FA;
+   font-weight: bold;
+   width: 85px;
+   height: auto;
+   border: none;
+   background-color: #F2B441;
+   transition: 0.3s;
+   border-radius: 5px;
+   transition: 0.3s;
+ }
+
+ .pageBtn:hover {
+   border: none;
+   background-color: #63BFAE;
+ }
