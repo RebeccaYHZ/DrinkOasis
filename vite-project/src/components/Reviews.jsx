@@ -23,31 +23,30 @@ function Reviews() {
 
     useEffect(() => {
       mainContentRef.current.focus();
-      fetch('/userApi/checkAuth', {
-        method: 'GET',
-        credentials: 'include',
-      })
-        .then((response) => {
+      const fetchAuth = async () => {
+        try {
+          const response = await fetch('/userApi/checkAuth', {
+            method: 'GET',
+            credentials: 'include',
+          });
           if (response.ok) {
-            return response.json();
-          } else {
-            navigate('/Login');
-          }
-        })
-        .then((data) => {
-          if (data && data.userId) {
-            setCurrentUser(data.userId);
+            const data = await response.json();
             setIsAuthenticated(true);
+            if (data && data.userId) {
+              setCurrentUser(data.userId);
+            } else {
+              setCurrentUser(null);
+            }
           } else {
+            console.error('Session fetch failed with status:', response.status);
             setIsAuthenticated(false);
-            navigate('/Login');
+            setCurrentUser(null);
           }
-        })
-        .catch((error) => {
-          setError(error.message);
-        });
-        
-        // fetchSession();
+          }catch(error) {
+            setError('Error fetching session:', error);
+          };
+        };
+        fetchAuth();
 
         const fetchReviews = async () => {
           try {
@@ -137,7 +136,9 @@ function Reviews() {
     };
 
     function renderEditDeleteButtons(review) {
-        if (isAuthenticated && currentUser && currentUser === review.id) {
+      console.log(currentUser);
+      console.log(review.id);
+        if (isAuthenticated && currentUser && currentUser == review.id) {
           return (
             <div className="button-container">
               <button className="edit-delete-btn" onClick={() => handleEditClick(review)}>Edit</button>
