@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import '../assets/css/Home.css';
 import cocktailImage from '../assets/img/Cocktails - Making Pictures.jpeg';
 
@@ -10,6 +11,11 @@ const Home = () => {
   };
   return (
     <main className="home-container" role="main">
+      <Helmet>
+        <meta name="description" 
+        content="Explore DrinkOasis: Discover and share the art of cocktail making, 
+        connect with local bars, explore new recipes, and document your mixology journey." />
+      </Helmet>
       <section className="home-content">
         <div className="home-text">
           <h1>Explore DrinkOasis</h1>

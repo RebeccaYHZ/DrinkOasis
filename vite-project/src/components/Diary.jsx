@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import '../assets/css/Diary.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -146,6 +147,11 @@ const Diary = () => {
   
   return (
     <div className='diary-area' aria-live="polite" ref={mainContentRef} tabIndex="-1">
+      <Helmet>
+        <title>User Diaries - Your Site Name</title>
+        <meta name="description" content="View and manage personal diary entries. Share your thoughts and experiences." />
+        <meta name="keywords" content="diary, personal entries, journal, user experiences" />
+      </Helmet>
       <section className="title">
         <div className="diary-title">
           <h1>📖 Diaries</h1>
