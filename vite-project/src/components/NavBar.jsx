@@ -54,7 +54,7 @@ function Navbar() {
   // const isAuthenticated = sessionStorage.getItem("user") !== null;
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary" 
+    <nav className="navbar navbar-expand-lg" 
     role="navigation" aria-label="Main navigation" ref={navbarRef} tabIndex="-1">
       <div className="container-fluid">
         <div className="brand-top">
