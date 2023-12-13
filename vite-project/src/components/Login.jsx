@@ -83,4 +83,6 @@ function Login() {
   );
 }
 
+Login.propTypes = {};
+
 export default Login;

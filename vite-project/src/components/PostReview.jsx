@@ -76,4 +76,6 @@ function PostReview() {
   );
 }
 
+PostReview.propTypes = {};
+
 export default PostReview;

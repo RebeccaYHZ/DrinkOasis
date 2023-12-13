@@ -176,6 +176,6 @@ const Diary = () => {
   
   };
   
-
+Diary.propTypes = {};
 
 export default Diary;
