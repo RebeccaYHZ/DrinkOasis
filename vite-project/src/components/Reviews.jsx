@@ -17,33 +17,38 @@ function Reviews() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [error, setError] = useState(null);
+  
     
 
     useEffect(() => {
       mainContentRef.current.focus();
-        const fetchSession = async () => {
-            try {
-              const response = await fetch('/api/session');
-              if (response.ok) {
-                const data = await response.json();
-                setIsAuthenticated(data.isAuthenticated);
-                if (data.isAuthenticated) {
-                  setCurrentUser(data.user);
-                } else {
-                  setCurrentUser(null);
-                  console.log('Not logged in');
-                }
-              } else {
-                console.error('Session fetch failed with status:', response.status);
-                setIsAuthenticated(false);
-                setCurrentUser(null);
-              }
-            } catch (error) {
-              console.error('Error fetching session:', error);
-            }
-        };
+      fetch('/userApi/checkAuth', {
+        method: 'GET',
+        credentials: 'include',
+      })
+        .then((response) => {
+          console.log("Reviews: ", response);
+          if (response.ok) {
+            return response.json();
+          } else {
+            navigate('/Login');
+          }
+        })
+        .then((data) => {
+          if (data && data.userId) {
+            setCurrentUser(data.userId);
+            setIsAuthenticated(true);
+          } else {
+            setIsAuthenticated(false);
+            navigate('/Login');
+          }
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
         
-        fetchSession();
+        // fetchSession();
 
         const fetchReviews = async () => {
           try {
@@ -61,7 +66,11 @@ function Reviews() {
         };
 
       fetchReviews();
-    }, [currentPage]);
+    }, [navigate, isAuthenticated, currentPage]);
+
+    if (error) {
+      return <div>Error: {error}</div>;
+    }
 
     const handleEditClick = (review) => {
         setEditReviewId(review._id);

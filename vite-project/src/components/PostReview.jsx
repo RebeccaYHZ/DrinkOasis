@@ -9,17 +9,42 @@ function PostReview() {
   const [address, setAddress] = useState("");
   const [review, setReview] = useState("");
   const [submitStatus, setSubmitStatus] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
   const mainContentRef = useRef(null);
 
   useEffect(() => {
     mainContentRef.current.focus();
-    const isAuthenticated = sessionStorage.getItem("user") !== null;
-    if (!isAuthenticated) {
-      navigate('/Login');
-    }
-  }, [navigate]);
+    fetch('/userApi/checkAuth', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          // throw new Error('User not logged in');
+          navigate('/Login');
+        }
+      })
+      .then((data) => {
+        if (data && data.userId) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+          navigate('/Login');
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, [navigate, isAuthenticated]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

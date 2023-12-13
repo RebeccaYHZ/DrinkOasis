@@ -11,14 +11,6 @@ import LocalStrategy from "passport-local";
 import crypto from "crypto";
 import { userDB } from "./modules/userDB.js";
 
-// userDB.getUser = () => {
-//   return {
-//     username: "test",
-//     salt: Buffer.from("test"),
-//     hashed_password: Buffer.from("test"),
-//   };
-// };
-
 const strategy = new LocalStrategy(async function verify(
   username,
   password,
