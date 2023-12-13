@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import '../app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../assets/css/NavBar.css';
 import logoImage from '../assets/img/logoImage.png';
 
 function Navbar() {
@@ -74,24 +74,24 @@ function Navbar() {
         <div className="justify-content-end" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/Reviews" className="nav-link">
+              <Link to="/Reviews" className="nav-link1">
                 Reviews
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/Diary" className="nav-link">
+              <Link to="/Diary" className="nav-link2">
                 My Diaries
               </Link>
             </li>
             {!isAuthenticated ? (
           <>
             <li className="nav-item">
-              <Link to="/Register" className="nav-link">
+              <Link to="/Register" className="nav-link3">
                 Sign Up
               </Link>
             </li>
               <li className="nav-item">
-                <Link to="/Login" className="nav-link">
+                <Link to="/Login" className="nav-link4">
                   Login
                 </Link>
               </li>
@@ -99,7 +99,7 @@ function Navbar() {
             ) : (
               <>
               <li className="nav-item">
-                <Link to="/Login" className="nav-link" onClick={handleLogout}>
+                <Link to="/Login" className="nav-link4" onClick={handleLogout}>
                   Logout
                 </Link>
               </li>
