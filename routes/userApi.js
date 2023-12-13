@@ -24,9 +24,9 @@ router.post("/login/password", function (req, res, next) {
 
 router.get("/checkAuth", (req, res) => {
   if (req.isAuthenticated()) {
-    res.status(200).json({ authenticated: true });
+    res.status(200).json({ authenticated: true, userId: req.user.id });
   } else {
-    res.status(401).json({ authenticated: false });
+    res.status(401).json({ authenticated: false, userId: null });
   }
 });
 
@@ -81,7 +81,7 @@ router.get("/logout", async (req, res) => {
 
 router.post("/postDiary", async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = req.user.id;
     const { title, content } = req.body;
 
     const newDiary = {
@@ -107,7 +107,7 @@ router.post("/postDiary", async (req, res) => {
 
 router.get("/diaries", async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = req.user.id;
 
     const result = await userDB.getDiaries(id);
     console.log("result.status:", result.status);
@@ -123,7 +123,7 @@ router.get("/diaries", async (req, res) => {
 });
 
 router.delete("/deleteDiary/:diaryId", async (req, res) => {
-  const { id } = req.query;
+  const id = req.user.id;
   const diaryId = req.params.diaryId;
 
   try {

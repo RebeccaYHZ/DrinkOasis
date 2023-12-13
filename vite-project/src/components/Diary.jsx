@@ -1,27 +1,45 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-// import { useParams } from 'react-router-dom';
 import '../assets/css/Diary.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Diary = () => {
   const [diaries, setDiaries] = useState([]);
   const [error, setError] = useState(null);
-  // const { otherId } = useParams(); 
   const navigate = useNavigate();
-  const userId = checkUserLoginStatus(); // current user id
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userId, setUserId] = useState(null); // current user id
 
   const location = useLocation();
   const { otherId } = location.state || {};
 
-useEffect(() => {
-    const isAuthenticated = sessionStorage.getItem("user") !== null;
+  useEffect(() => {
+    fetch('/userApi/checkAuth', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('User not logged in');
+        }
+      })
+      .then((data) => {
+        if (data && data.userId) {
+          setUserId(data.userId);
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+          navigate('/Login');
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, [navigate, userId]);
 
-    if (!isAuthenticated) {
-      navigate('/Login');
-      return;
-    }
-
+  useEffect(() => {
     const apiUrl = () => {
       if(otherId != null) {
         return `/userApi/diaries?id=${otherId}`;
@@ -30,35 +48,35 @@ useEffect(() => {
       }
     }
 
-    fetch(apiUrl(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Failed to fetch diaries');
-        }
-      })
-      .then((data) => {
-        setDiaries(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [navigate, otherId, userId]);
+    const fetchData = () => {
+        fetch(apiUrl(), {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Failed to fetch diaries');
+            }
+          })
+          .then((data) => {
+            setDiaries(data);
+          })
+          .catch((error) => {
+            setError(error.message);
+          });
+      }
+
+    fetchData();
+
+  }, [userId, otherId]);
 
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  // const isCurrentUserAuthor = (diaryUserId) => 
-  // console.log(diaryUserId);
-  // console.log(userId);
-  // diaryUserId === userId;
 
   const handleDelete = (diaryId) => {
     
@@ -109,11 +127,6 @@ useEffect(() => {
   const handleEditDiaryClick = (diaryId) => {
     navigate('/EditDiary', { state: { diaryId: diaryId } });
   };
-
-  function checkUserLoginStatus() {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    return user && user.id ? user.id : null;
-  }
 
   const editAndDeleteButtons = (diary) => {
     if (diary.userId == userId) {
