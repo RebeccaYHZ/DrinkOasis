@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import '../assets/css/Reviews.css';
 
 function Reviews() {
@@ -38,7 +39,6 @@ function Reviews() {
               setCurrentUser(null);
             }
           } else {
-            console.error('Session fetch failed with status:', response.status);
             setIsAuthenticated(false);
             setCurrentUser(null);
           }
@@ -166,6 +166,13 @@ function Reviews() {
     };    
 
     return (
+      <>
+        <Helmet>
+            <title>Bar Reviews</title>
+            <meta name="description" content="Read and write reviews about different bars. 
+            Share your experiences and discover new places." />
+            <meta name="keywords" content="bars, reviews, drinks, nightlife" />
+        </Helmet>
         <main className="main" aria-label="Reviews section" ref={mainContentRef} tabIndex="-1">
             <header className="title">
                 <h1>Bar Reviews</h1>
@@ -245,6 +252,7 @@ function Reviews() {
               <button className="pageBtn" onClick={goToLastPage} disabled={currentPage === totalPages}>Last</button>
             </nav>
         </main>
+      </>
     );
 }
 

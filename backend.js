@@ -96,6 +96,10 @@ app.use(passport.session());
 app.use("/api", api);
 app.use("/userApi", userApi);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
