@@ -28,7 +28,6 @@ function Reviews() {
         credentials: 'include',
       })
         .then((response) => {
-          console.log("Reviews: ", response);
           if (response.ok) {
             return response.json();
           } else {
@@ -138,7 +137,7 @@ function Reviews() {
     };
 
     function renderEditDeleteButtons(review) {
-        if (isAuthenticated && currentUser && currentUser.id === review.id) {
+        if (isAuthenticated && currentUser && currentUser === review.id) {
           return (
             <div className="button-container">
               <button className="edit-delete-btn" onClick={() => handleEditClick(review)}>Edit</button>

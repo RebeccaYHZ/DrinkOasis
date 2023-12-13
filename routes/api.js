@@ -46,12 +46,12 @@ router.post("/reviews", async (req, res) => {
 
 router.put("/reviews/:reviewId", async (req, res) => {
   // Check if the user is logged in
-  if (!req.session.user || !req.session.user.id) {
+  if (!req.user || !req.user.id) {
     return res.status(401).send({ message: "Unauthorized access." });
   }
 
   const { reviewId } = req.params;
-  const userId = req.session.user.id;
+  const userId = req.user.id;
   const reviewUpdates = req.body;
 
   try {
@@ -78,12 +78,12 @@ router.put("/reviews/:reviewId", async (req, res) => {
 // Delete review
 router.delete("/reviews/:reviewId", async (req, res) => {
   // Check if the user is logged in
-  if (!req.session.user || !req.session.user.id) {
+  if (!req.user || !req.user.id) {
     return res.status(401).send({ message: "Unauthorized access." });
   }
 
   const { reviewId } = req.params;
-  const userId = req.session.user.id;
+  const userId = req.user.id;
 
   try {
     const existingReview = await reviewDB.getReviewById(reviewId);
@@ -106,12 +106,12 @@ router.delete("/reviews/:reviewId", async (req, res) => {
   }
 });
 
-router.get("/session", (req, res) => {
-  if (req.session && req.session.user) {
-    res.json({ isAuthenticated: true, user: req.session.user });
-  } else {
-    res.json({ isAuthenticated: false });
-  }
-});
+// router.get("/session", (req, res) => {
+//   if (req.session && req.session.user) {
+//     res.json({ isAuthenticated: true, user: req.session.user });
+//   } else {
+//     res.json({ isAuthenticated: false });
+//   }
+// });
 
 export default router;
