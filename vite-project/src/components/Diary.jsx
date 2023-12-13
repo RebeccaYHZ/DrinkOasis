@@ -40,6 +40,12 @@ const Diary = () => {
   }, [navigate, userId]);
 
   useEffect(() => {
+    if(!isAuthenticated) {
+      navigate('/Login');
+    }
+  }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
     const apiUrl = () => {
       if(otherId != null) {
         return `/userApi/diaries?id=${otherId}`;
