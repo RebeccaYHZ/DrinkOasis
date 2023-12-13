@@ -9,3 +9,27 @@
 .justify-content-end {
     font-size: 20px;
 }
+
+.nav-link1,
+.nav-link2,
+.nav-link3,
+.nav-link4 {
+    color: #252859;
+    transition: color 0.3s ease;
+}
+
+.nav-link1:hover,
+.nav-link2:hover,
+.nav-link3:hover,
+.nav-link4:hover {
+    color: #F25764;
+}
+
+.navbar-brand {
+    color: #252859;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #F25764;
+}
