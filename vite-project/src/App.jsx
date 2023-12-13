@@ -10,7 +10,6 @@ import PostReview from './components/PostReview'
 import NavBar from './components/NavBar'
 import EditDiary from './components/EditDiary'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import './app.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 

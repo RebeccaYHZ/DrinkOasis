@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Home.css';
-import cocktailImage from '../assets/img/Bar.jpeg';
+import cocktailImage from '../assets/img/Cocktails - Making Pictures.jpeg';
 
 const Home = () => {
   const navigate = useNavigate();
