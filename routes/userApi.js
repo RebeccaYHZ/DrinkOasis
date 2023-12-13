@@ -116,8 +116,14 @@ const isAuthenticated = (req, res, next) => {
 router.get("/diaries", isAuthenticated, async (req, res) => {
   try {
     const id = req.user.id;
+    const otherId = req.query.id;
+    console.log("otherId:", otherId);
 
-    const result = await userDB.getDiaries(id);
+    const result =
+      otherId != null
+        ? await userDB.getDiaries(otherId)
+        : await userDB.getDiaries(id);
+
     console.log("result.status:", result.status);
     if (result.status === 200) {
       res.json(result.diariesCollection);

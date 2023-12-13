@@ -13,6 +13,7 @@ const Diary = () => {
 
   const location = useLocation();
   const { otherId } = location.state || {};
+  console.log('otherId in Diary page: ', otherId);
 
   useEffect(() => {
     mainContentRef.current.focus();
@@ -44,16 +45,10 @@ const Diary = () => {
 
 
   useEffect(() => {
-    const apiUrl = () => {
-      if(otherId != null) {
-        return `/userApi/diaries?id=${otherId}`;
-      }else {
-        return `/userApi/diaries?id=${userId}`;
-      }
-    }
+    const apiUrl = otherId != null ? `/userApi/diaries?id=${otherId}` : `/userApi/diaries`;
     
     const fetchData = () => {
-        fetch(apiUrl(), {
+        fetch(apiUrl, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
