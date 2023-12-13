@@ -38,19 +38,23 @@ Class Link: [Web Development Fall 2023](https://johnguerra.co/classes/webDevelop
 3. **Post, Delete, and Edit Diaries**  
    Once logged in, users can post diaries documenting their home-made cocktail making diaries and their experiences when making drinks, and they can only delete or edit their own posts.
    ![Diaries page image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/diaries.png)
-   ![Diaries post image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/postdiary.png?)
+   ![Diaries post image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/postdiary.png)
    ![Diaries edit image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/editdiary.png)
 
 4. **View Diaries**  
    Users’ diaries are only viewable after entering someone’s profile. Therefore, posts about bars will show the author, and clicking on the author will direct users to the author’s profile.
-   ![View diaries image](https://github.com/RebeccaYHZ/DrinkOasis/blob/main/vite-project/src/assets/img/Screenshot%202023-11-08%20at%2011.19.06%20PM.png)
+   ![View diaries image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/otherdiary.png)
 
 5. **Post, Read, Update, and Delete Bar Reviews**  
    Users can also post reviews about local bars. Although users can only delete or edit their own post, this page will be accessible to all users for exploring interesting bars.
-   ![Review(not log in) page image](https://github.com/RebeccaYHZ/DrinkOasis/blob/main/vite-project/src/assets/img/Screenshot%202023-11-08%20at%2011.02.40%20PM.png)
+   ![Review(not log in) page image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/reviewnotlogin.png)
    ![Review(log in) page image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/reviews.png)
    ![Review post image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/postreview.png)
-   ![Review edit image](https://github.com/RebeccaYHZ/DrinkOasis/blob/main/vite-project/src/assets/img/Screenshot%202023-11-08%20at%2011.18.17%20PM.png)
+   ![Review edit image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/editreview.png)
+
+
+## Color Palette & Fonts
+![Color Palette & Fonts image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/Screenshot%202023-12-13%20at%201.22.51%20PM.png)
 
 
 ## Setup and Usage
