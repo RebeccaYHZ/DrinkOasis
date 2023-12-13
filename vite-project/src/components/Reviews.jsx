@@ -141,8 +141,8 @@ function Reviews() {
         if (isAuthenticated && currentUser && currentUser == review.id) {
           return (
             <div className="button-container">
-              <button className="edit-delete-btn" onClick={() => handleEditClick(review)}>Edit</button>
-              <button className="edit-delete-btn" onClick={() => handleDeleteClick(review._id)}>Delete</button>
+              <button className="edit-btn" onClick={() => handleEditClick(review)}>Edit</button>
+              <button className="delete-btn" onClick={() => handleDeleteClick(review._id)}>Delete</button>
             </div>
           );
         }
