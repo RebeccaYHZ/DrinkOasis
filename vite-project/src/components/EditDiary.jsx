@@ -20,17 +20,41 @@ function EditDiary() {
 
   useEffect(() => {
     mainContentRef.current.focus();
-    fetch(`/userApi/getDiary/${userId}/${diaryId}`, {
-        method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    fetch('/userApi/checkAuth', {
+      method: 'GET',
+      credentials: 'include',
     })
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Failed to fetch diary');
+          throw new Error('User not logged in');
+        }
+      })
+      .then((data) => {
+        if (data && data.userId) {
+          setUserId(data.userId);
+        } else {
+          navigate('/Login');
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, [navigate, userId]);
+
+  useEffect(() => {
+    fetch(`/userApi/getDiary/${diaryId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to fetch diary');
         }
       })
       .then((data) => {
@@ -38,10 +62,10 @@ function EditDiary() {
         setTitle(data.title);
         setContent(data.content);
       })
-      .catch((error) => {
-        console.error(error.message);
-      });
-  }, [diaryId]);
+        .catch((error) => {
+          console.error(error.message);
+        });
+      }, [diaryId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
