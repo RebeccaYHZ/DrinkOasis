@@ -9,13 +9,44 @@ function PostDiary() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-  const userId = checkUserLoginStatus();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
   const mainContentRef = useRef(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     mainContentRef.current.focus();
-  }, []);
+    fetch('/userApi/checkAuth', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          // throw new Error('User not logged in');
+          navigate('/Login');
+        }
+      })
+      .then((data) => {
+        if (data && data.userId) {
+          setUserId(data.userId);
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+          navigate('/Login');
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, [navigate, isAuthenticated]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,11 +88,6 @@ function PostDiary() {
       alert("Please fill in the title and content before posting");
     }
   };
-
-  function checkUserLoginStatus() {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    return user && user.id ? user.id : null;
-  }
 
   return (
       <div className='post-area' ref={mainContentRef} tabIndex="-1">
