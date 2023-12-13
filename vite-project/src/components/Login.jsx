@@ -42,7 +42,7 @@ function Login() {
   
 
   return (
-    <div className='wrapper'>
+    <div className='wrapper' ref={mainContentRef} tabIndex="-1">
       <h1 className="form-register-heading">Login</h1>
       <form className="form-register" onSubmit={handleSubmit}>
         <section>
