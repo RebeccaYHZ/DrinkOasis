@@ -99,4 +99,6 @@ function Register() {
   );
 }
 
+Register.propTypes = {};
+
 export default Register;

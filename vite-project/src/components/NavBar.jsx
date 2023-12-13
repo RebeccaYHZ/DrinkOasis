@@ -116,4 +116,6 @@ function Navbar() {
   );
 }
 
+NavBar.propTypes = {};
+
 export default Navbar;
