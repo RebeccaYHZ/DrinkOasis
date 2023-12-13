@@ -9,86 +9,84 @@ body h1 {
 }
 
 .home-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 5rem);
-    padding-top: 2.5rem;
-    padding: 50px;
-    background-color: #fff;
-    margin-top: -6rem;
-    width: 100%;
-    padding: 0;
-  }
-  
-  .home-content {
-    display: flex;
-    max-width: 1200px;
-    margin: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  .home-text {
-    flex-basis: 50%;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: aliceblue;
-  }
-  
-  .home-image {
-    flex-basis: 50%;
-  }
-  
-  .home-image img {
-    width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove extra space below image */
-  }
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: 5rem;
+}
 
-  .description {
-    margin-top: 20px;
-  }
-  
-  .authors {
-    margin-top: 20px;
-    font-style: italic;
-  }
-  
-  .reviews-button {
-    margin-top: 40px;
-    margin-bottom: 30px;
-    color: #F8F9FA;
-    font-weight: bold;
-    font-size: large;
-    width: 120px;
-    border: none;
-    border-radius: 100px;
-    background-image: linear-gradient(135deg, #3b82f6, #ef4444, #16a34a, #eab308);
-    transition: 0.3s;
+
+.home-content {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.home-text {
+  flex-basis: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+.home-image {
+  flex-basis: 50%;
+}
+
+.home-image img {
+  width: 100%;
+  height: auto;
+  /* Maintain aspect ratio */
+  display: block;
+  /* Remove extra space below image */
+}
+
+.description {
+  margin-top: 20px;
+}
+
+.authors {
+  margin-top: 20px;
+  font-style: italic;
+}
+
+.reviews-button {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  color: #F8F9FA;
+  font-weight: bold;
+  font-size: large;
+  width: 120px;
+  border: none;
+  border-radius: 100px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  background-image: linear-gradient(135deg, #F25764, #F291A3, #63BFAE, #F2B441);
+  transition: 0.3s;
 }
 
 .reviews-button:hover {
-    transform: scale(110%);
-    color: #F8F9FA;
+  transform: scale(110%);
+  color: #F8F9FA;
 }
 
-  @media (max-width: 768px) {
-    .home-content {
-      flex-direction: column;
-    }
-  
-    .home-text,
-    .home-image {
-      flex-basis: 100%;
-    }
-  
-    .home-image img {
-      width: 100%;
-      height: auto;
-    }
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
   }
-  
+
+  .home-text,
+  .home-image {
+    flex-basis: 100%;
+  }
+
+  .home-image img {
+    width: 100%;
+    height: auto;
+  }
+}

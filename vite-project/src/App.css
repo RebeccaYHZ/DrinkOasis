@@ -6,6 +6,7 @@
 }
 
 .logo {
+  width: auto;
   height: 7em;
   padding: 1.5em;
   will-change: filter;
@@ -74,7 +75,8 @@
   margin-left: 50px;
 }
 
-.navbar a:focus, .navbar button:focus {
+.navbar a:focus,
+.navbar button:focus {
   outline: 2px solid blue;
   outline-offset: 2px;
 }

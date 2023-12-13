@@ -6,7 +6,7 @@ body h1 {
     font-family: 'Afacad';
     font-size: 3.5rem;
     font-weight: bold;
-  }
+}
 
 .post-container {
     max-width: 800px;
@@ -20,8 +20,8 @@ body h1 {
     margin-top: 20px;
 }
 
-.post-form input, 
-.post-form textarea, 
+.post-form input,
+.post-form textarea,
 .post-form button {
     width: 100%;
     padding: 10px;
@@ -31,12 +31,11 @@ body h1 {
 }
 
 .post-form button {
-    background-color: #333;
+    background-image: linear-gradient(135deg, #F25764, #F291A3, #63BFAE, #F2B441);
     color: #fff;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .post-form button:hover {
-    background-color: #555;
+    background-color: #252859;
 }

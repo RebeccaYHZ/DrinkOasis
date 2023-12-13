@@ -1,5 +1,6 @@
 .navbar {
     padding: 0;
+    /* background-color: #F25764; */
 }
 
 .container-fluid {
@@ -22,7 +23,7 @@
 .nav-link2:hover,
 .nav-link3:hover,
 .nav-link4:hover {
-    color: #F25764;
+    color: #fafaf9;
 }
 
 .navbar-brand {
@@ -31,5 +32,5 @@
 }
 
 .navbar-brand:hover {
-    color: #F25764;
+    color: #fafaf9;
 }
