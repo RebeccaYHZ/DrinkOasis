@@ -19,6 +19,7 @@ function EditDiary() {
   const { diaryId } = location.state ? location.state : null;
 
   useEffect(() => {
+    mainContentRef.current.focus();
     fetch(`/userApi/getDiary/${userId}/${diaryId}`, {
         method: 'GET',
       headers: {
