@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../assets/css/Diary.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +7,7 @@ const Diary = () => {
   const [diaries, setDiaries] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const mainContentRef = useRef(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userId, setUserId] = useState(null); // current user id
 
@@ -14,6 +15,7 @@ const Diary = () => {
   const { otherId } = location.state || {};
 
   useEffect(() => {
+    mainContentRef.current.focus();
     fetch('/userApi/checkAuth', {
       method: 'GET',
       credentials: 'include',
@@ -141,7 +143,7 @@ const Diary = () => {
   };
   
   return (
-    <div className='diary-area' aria-live="polite">
+    <div className='diary-area' aria-live="polite" ref={mainContentRef} tabIndex="-1">
       <section className="title">
         <div className="diary-title">
           <h1>📖 Diaries</h1>

@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Register() {
   const navigate = useNavigate();
+  const mainContentRef = useRef(null);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    mainContentRef.current.focus();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +51,7 @@ function Register() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" ref={mainContentRef} tabIndex="-1">
       <h1 className="form-register-heading">Registration</h1>
       <form className="form-register" onSubmit={handleRegister}>
         <div>

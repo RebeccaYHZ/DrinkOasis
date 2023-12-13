@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -12,11 +12,13 @@ function EditDiary() {
   const [statusMessage, setStatusMessage] = useState('');
   const userId = checkUserLoginStatus();
   const navigate = useNavigate();
+  const mainContentRef = useRef(null);
 
   const location = useLocation();
   const { diaryId } = location.state ? location.state : null;
 
   useEffect(() => {
+    mainContentRef.current.focus();
     fetch(`/userApi/getDiary/${userId}/${diaryId}`, {
         method: 'GET',
       headers: {
@@ -88,7 +90,7 @@ function EditDiary() {
   }
 
   return (
-      <div className='post-area'>
+      <div className='post-area' ref={mainContentRef} tabIndex="-1">
         <section className="title">
         <div className="post-title">
           <h1>📖 Edit Your Diary!</h1>

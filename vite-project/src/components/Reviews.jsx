@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Reviews.css';
 
 function Reviews() {
     const navigate = useNavigate();
+    const mainContentRef = useRef(null);
     const [reviews, setReviews] = useState([]);
     const [editReviewId, setEditReviewId] = useState(null);
     const [editFormData, setEditFormData] = useState({
@@ -19,6 +20,7 @@ function Reviews() {
     
 
     useEffect(() => {
+      mainContentRef.current.focus();
         const fetchSession = async () => {
             try {
               const response = await fetch('/api/session');
@@ -155,7 +157,7 @@ function Reviews() {
     };    
 
     return (
-        <main className="main" aria-label="Reviews section">
+        <main className="main" aria-label="Reviews section" ref={mainContentRef} tabIndex="-1">
             <header className="title">
                 <h1>Bar Reviews</h1>
                 <div className="post-btn">

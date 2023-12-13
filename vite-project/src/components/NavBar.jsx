@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,10 +7,14 @@ import logoImage from '../assets/img/logoImage.png';
 
 function Navbar() {
   const navigate = useNavigate();
+  const navbarRef = useRef(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
+    if (window.location.pathname === '/') {
+      navbarRef.current.focus();
+    }
     const checkAuth = async () => {
       try {
         const response = await fetch("/userApi/checkAuth");
@@ -51,7 +55,7 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary" 
-    role="navigation" aria-label="Main navigation">
+    role="navigation" aria-label="Main navigation" ref={navbarRef} tabIndex="-1">
       <div className="container-fluid">
         <div className="brand-top">
           <Link to="/" className='top-brand'>

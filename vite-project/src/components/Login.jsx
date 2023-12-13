@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Register.css';
 
 function Login() {
   const navigate = useNavigate();
+  const mainContentRef = useRef(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    mainContentRef.current.focus();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
