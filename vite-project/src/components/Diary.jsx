@@ -22,7 +22,8 @@ const Diary = () => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('User not logged in');
+          // throw new Error('User not logged in');
+          navigate('/Login');
         }
       })
       .then((data) => {
@@ -37,13 +38,8 @@ const Diary = () => {
       .catch((error) => {
         setError(error.message);
       });
-  }, [navigate, userId]);
+  }, [navigate, isAuthenticated]);
 
-  useEffect(() => {
-    if(!isAuthenticated) {
-      navigate('/Login');
-    }
-  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     const apiUrl = () => {
@@ -53,7 +49,7 @@ const Diary = () => {
         return `/userApi/diaries?id=${userId}`;
       }
     }
-
+    
     const fetchData = () => {
         fetch(apiUrl(), {
           method: 'GET',
@@ -78,7 +74,7 @@ const Diary = () => {
 
     fetchData();
 
-  }, [userId, otherId]);
+  }, [isAuthenticated, userId, otherId]);
 
   if (error) {
     return <div>Error: {error}</div>;

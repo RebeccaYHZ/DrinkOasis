@@ -105,7 +105,15 @@ router.post("/postDiary", async (req, res) => {
   }
 });
 
-router.get("/diaries", async (req, res) => {
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(401).json({ message: "User not authenticated" });
+  }
+};
+
+router.get("/diaries", isAuthenticated, async (req, res) => {
   try {
     const id = req.user.id;
 
