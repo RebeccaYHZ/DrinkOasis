@@ -10,26 +10,52 @@ function EditDiary() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-  const userId = checkUserLoginStatus();
+  const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
 
   const location = useLocation();
   const { diaryId } = location.state ? location.state : null;
 
   useEffect(() => {
-    fetch(`/userApi/getDiary/${userId}/${diaryId}`, {
-        method: 'GET',
+    fetch('/userApi/checkAuth', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('User not logged in');
+        }
+      })
+      .then((data) => {
+        if (data && data.userId) {
+          setUserId(data.userId);
+        } else {
+          navigate('/Login');
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, [navigate, userId]);
+
+
+  useEffect(() => {
+    fetch(`/userApi/getDiary/${diaryId}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    .then((response) => {
-        if (response.status === 200) {
+      .then((response) => {
+        if (response.ok) {
           return response.json();
         } else {
-            throw new Error('Failed to fetch diaries');
+          throw new Error('Failed to fetch diary');
         }
-        })
+      })
       .then((data) => {
         console.log("data: ", data);
         setTitle(data.title);
@@ -38,7 +64,7 @@ function EditDiary() {
       .catch((error) => {
         console.error(error.message);
       });
-  }, [userId, diaryId]);
+  }, [diaryId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +78,7 @@ function EditDiary() {
   const handleEditDiary = (e) => {
     e.preventDefault();
     if (title && content && diaryId) {
-      fetch(`/userApi/edit/${userId}/${diaryId}`, {
+      fetch(`/userApi/edit/${diaryId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -82,9 +108,8 @@ function EditDiary() {
     }
   };
 
-  function checkUserLoginStatus() {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    return user && user.id ? user.id : null;
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
