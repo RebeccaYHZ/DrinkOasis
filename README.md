@@ -56,6 +56,13 @@ Class Link: [Web Development Fall 2023](https://johnguerra.co/classes/webDevelop
 ## Color Palette & Fonts
 ![Color Palette & Fonts image](https://github.com/RebeccaYHZ/DrinkOasis/blob/Revised-Usability/vite-project/src/assets/img/Screenshot%202023-12-13%20at%201.22.51%20PM.png)
 
+## Lighthouse Justification
+1. Best Practices
+   Browser errors were logged to the console on review page:
+   Because we want users to be able to view all reviews even though they are not logged in, and not logged in users have a 401 status
+2. SEO
+   robot.txt is correctly added in the root folder of front-end code but isn't properly accessed due to the way the "build" command is set up in vite
+
 
 ## Setup and Usage
 
