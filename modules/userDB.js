@@ -222,12 +222,15 @@ function UserDB() {
   };
 
   userDB.getDiary = async (id, diaryId) => {
-    const userId = parseInt(id, 10);
     const { client, db } = await connectToMongoDB();
     const usersCollection = db.collection("User");
+    console.log("User id for get Diary:", id);
 
     try {
-      const userSelect = await usersCollection.findOne({ id: userId });
+      const userSelect = await usersCollection.findOne({
+        id: id,
+      });
+      console.log("User select for get Diary:", userSelect);
       if (!userSelect) {
         return { status: 404, message: "User not found" };
       }
@@ -256,12 +259,12 @@ function UserDB() {
   };
 
   userDB.editDiary = async (id, diaryId, newDiary) => {
-    const userId = parseInt(id, 10);
+    // const userId = parseInt(id, 10);
     const { client, db } = await connectToMongoDB();
     const usersCollection = db.collection("User");
 
     try {
-      const userSelect = await usersCollection.findOne({ id: userId });
+      const userSelect = await usersCollection.findOne({ id: id });
       if (!userSelect) {
         return { status: 404, message: "User not found" };
       }
@@ -282,7 +285,7 @@ function UserDB() {
       diariesCollection[diaryIndex] = newDiary;
 
       const updateResult = await usersCollection.updateOne(
-        { id: userId },
+        { id: id },
         { $set: { diaries: diariesCollection } }
       );
 

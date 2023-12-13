@@ -141,12 +141,13 @@ router.delete("/deleteDiary/:diaryId", async (req, res) => {
   }
 });
 
-router.get("/getDiary/:userId/:diaryId", async (req, res) => {
-  const userId = req.params.userId;
+router.get("/getDiary/:diaryId", async (req, res) => {
+  const userId = req.user.id;
   const diaryId = req.params.diaryId;
 
   try {
     const result = await userDB.getDiary(userId, diaryId);
+    console.log("/getDiary/:diaryId result.status:", result.status);
     if (result.status === 200) {
       res.status(200).json(result.diary);
     } else if (result.status === 404) {
@@ -160,8 +161,8 @@ router.get("/getDiary/:userId/:diaryId", async (req, res) => {
   }
 });
 
-router.put("/edit/:userId/:diaryId", async (req, res) => {
-  const userId = req.params.userId;
+router.put("/edit/:diaryId", async (req, res) => {
+  const userId = req.user.id;
   const diaryId = parseInt(req.params.diaryId);
   const { title, content } = req.body;
 
