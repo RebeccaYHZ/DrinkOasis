@@ -6,10 +6,8 @@
 }
 
 .logo {
-  width: auto;
-  height: auto;
-  max-width: 15%;
-  max-height: 15%;
+  width: 166.75px;
+  height: 155.75px;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;

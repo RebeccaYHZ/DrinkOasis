@@ -146,13 +146,12 @@
    width: 85px;
    height: auto;
    border: none;
-   background-color: #F25764;
+   background-color: #252859;
    transition: 0.3s;
    border-radius: 5px;
    transition: 0.3s;
  }
 
  .pageBtn:hover {
-   border: none;
-   background-color: #252859;
+   transform: scale(110%);
  }
