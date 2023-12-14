@@ -21,10 +21,13 @@ Class Link: [Web Development Fall 2023](https://johnguerra.co/classes/webDevelop
 [Improvement Plan](https://docs.google.com/document/d/10Jnv5J87FlGdX1pgOJYjYwuSxs-AQHQ1Out3IFNADDw/edit?usp=sharing)
 
 **Presentation slides**
-[Presentation slides](https://www.canva.com/design/DAFzp16hnU8/TpF0pr1Au025IUZH15PuIw/edit?utm_content=DAFzp16hnU8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[Presentation slides](https://www.canva.com/design/DAF25scYCJg/cMvxYkyqhQUqlXY_phWJ0w/edit?utm_content=DAF25scYCJg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 **Youtube Video**
-[Youtube Video](https://youtu.be/4yUA7QiihvQ)
+[Youtube Video](https://youtu.be/fp8-8meX0u4)
+
+**Usibility Report**
+[Usibility Report](https://docs.google.com/document/d/1UUBbzTh7xV7fRkgyU8loDR8INncQGhLTn0fqeT7g42M/edit?usp=sharing)
 
 ## Project Functionalities
 
@@ -74,7 +77,7 @@ Class Link: [Web Development Fall 2023](https://johnguerra.co/classes/webDevelop
 ## Instruction to build
 
 **Clone the Repository:**
-git clone https://github.com/RebeccaYHZ/DrinkOasis.git
+git clone https://github.com/RebeccaYHZ/DrinkOasis/tree/Revised-Usability
 
 **Enter the Project Directory:**
 cd DrinkOasis
